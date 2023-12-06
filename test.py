@@ -36,29 +36,29 @@ class SelectionForm(QMainWindow):
         self.finish_button.clicked.connect(self.finish_selection)
         self.layout.addWidget(self.finish_button)
 
-        self.selected_items = []
+        self.all_selections = []
 
     def save_selection(self):
         combo_text = self.combo_box.currentText()
         list_1_selected = [self.list_widget_1.item(i).text() for i in range(self.list_widget_1.count()) if self.list_widget_1.item(i).isSelected()]
         list_2_selected = [self.list_widget_2.item(i).text() for i in range(self.list_widget_2.count()) if self.list_widget_2.item(i).isSelected()]
 
-        self.selected_items.append((combo_text, list_1_selected, list_2_selected))
+        self.all_selections.append((combo_text, list_1_selected, list_2_selected))
 
         self.list_widget_1.clearSelection()
         self.list_widget_2.clearSelection()
 
     def finish_selection(self):
         print("Seçimler Kaydedildi:")
-        for index, selection in enumerate(self.selected_items, start=1):
+        for index, selections in enumerate(self.all_selections, start=1):
             print(f"Seçim {index}:")
-            print(f"Combobox: {selection[0]}")
-            print(f"Liste 1 Seçimleri: {selection[1]}")
-            print(f"Liste 2 Seçimleri: {selection[2]}")
+            print(f"Combobox: {selections[0]}")
+            print(f"Liste 1 Seçimleri: {selections[1]}")
+            print(f"Liste 2 Seçimleri: {selections[2]}")
             print("----------------------")
 
         # Seçimleri sıfırla
-        self.selected_items = []
+        self.all_selections = []
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
